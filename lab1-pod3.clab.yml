@@ -1,0 +1,32 @@
+###
+#
+# This is the lab for pod 3
+#
+###
+---
+name: lab1-pod3
+mgmt:
+  network: pod3
+  ipv4_subnet: 172.16.18.0/24
+topology: 
+  kinds:
+    vr-ros:
+      image: vrnetlab/vr-routeros:6.47.10
+  nodes:
+    R1:
+      kind: vr-ros
+      mgmt_ipv4: 172.16.18.11
+    R2:
+      kind: vr-ros
+      mgmt_ipv4: 172.16.18.12
+    R3:
+      kind: vr-ros
+      mgmt_ipv4: 172.16.18.13
+    R4:
+      kind: vr-ros
+      mgmt_ipv4: 172.16.18.14
+
+  links:
+      - endpoints: ["R1:eth1", "R2:eth1"]
+      - endpoints: ["R2:eth2", "R3:eth2"]
+      - endpoints: ["R3:eth1", "R4:eth1"]
