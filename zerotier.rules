@@ -1,0 +1,52 @@
+tag server
+  id 2
+  enum 0 No
+  enum 1 Yes
+  default No
+;
+# Whitelist only IPv4 (/ARP)
+drop
+	not ethertype ipv4
+	and not ethertype arp
+;
+
+# Drop traffic directed at the server
+break
+	not tor server 1
+	or ipdest 172.22.0.1/32
+	or ipdest 172.16.0.0/16
+;
+
+cap superuser
+  id 1000
+  accept;
+;
+
+# Lab Pod 1
+cap pod_1
+  id 1
+  accept
+		ipdest 172.16.16.0/24
+		and not ipdest 172.16.16.1/32
+  ;
+;
+
+# Lab Pod 2
+cap pod_2
+  id 2
+  accept
+		ipdest 172.16.17.0/24
+		and not ipdest 172.16.17.1/32
+  ;
+;
+
+# Lab Pod 3
+cap pod_3
+  id 3
+  accept
+		ipdest 172.16.18.0/24
+		and not ipdest 172.16.18.1/32
+  ;
+;
+
+accept;
