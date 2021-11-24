@@ -11,7 +11,7 @@ mgmt:
 topology: 
   kinds:
     vr-ros:
-      image: vrnetlab/vr-routeros:6.47.10
+      image: docker.io/iparchitechs/chr:long-term
   nodes:
     R1:
       kind: vr-ros
